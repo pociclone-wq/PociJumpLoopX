@@ -85,7 +85,7 @@ countdownLabel.TextColor3 = Color3.fromRGB(255,255,255)
 countdownLabel.Font = Enum.Font.SourceSansBold
 countdownLabel.TextSize = 16
 
--- Tombol Save lokasi (2 kolom, abu-abu netral)
+-- Tombol Save lokasi (pakai CFrame)
 for i,spot in ipairs(spots) do
     local btnSave = Instance.new("TextButton", menu)
     btnSave.Size = UDim2.new(0,115,0,30)
@@ -94,42 +94,42 @@ for i,spot in ipairs(spots) do
     local xOffset = 10 + col*125
     btnSave.Position = UDim2.new(0,xOffset,0,140 + row*35)
     btnSave.Text = "Save "..spot
-    btnSave.BackgroundColor3 = Color3.fromRGB(100,100,100) -- abu-abu
+    btnSave.BackgroundColor3 = Color3.fromRGB(100,100,100)
     btnSave.TextColor3 = Color3.fromRGB(255,255,255)
     Instance.new("UICorner", btnSave).CornerRadius = UDim.new(0,6)
 
     btnSave.MouseButton1Click:Connect(function()
         local char = game.Players.LocalPlayer.Character
         if char and char:FindFirstChild("HumanoidRootPart") then
-            savedLocations[spot] = char.HumanoidRootPart.Position
+            savedLocations[spot] = char.HumanoidRootPart.CFrame
         end
     end)
 end
 
--- Tombol Reset semua lokasi (abu-abu netral)
+-- Tombol Reset semua lokasi
 local btnResetAll = Instance.new("TextButton", menu)
 btnResetAll.Size = UDim2.new(1,-20,0,30)
 btnResetAll.Position = UDim2.new(0,10,0,220)
 btnResetAll.Text = "Reset Semua Lokasi"
-btnResetAll.BackgroundColor3 = Color3.fromRGB(100,100,100) -- abu-abu
+btnResetAll.BackgroundColor3 = Color3.fromRGB(100,100,100)
 btnResetAll.TextColor3 = Color3.fromRGB(255,255,255)
 Instance.new("UICorner", btnResetAll).CornerRadius = UDim.new(0,6)
 
--- Tombol Run (biru)
+-- Tombol Run
 local btnRun = Instance.new("TextButton", menu)
 btnRun.Size = UDim2.new(1,-20,0,30)
 btnRun.Position = UDim2.new(0,10,0,260)
 btnRun.Text = "Run Global Loop"
-btnRun.BackgroundColor3 = Color3.fromRGB(0,120,255) -- biru
+btnRun.BackgroundColor3 = Color3.fromRGB(0,120,255)
 btnRun.TextColor3 = Color3.fromRGB(255,255,255)
 Instance.new("UICorner", btnRun).CornerRadius = UDim.new(0,6)
 
--- Tombol Stop (merah)
+-- Tombol Stop
 local btnStop = Instance.new("TextButton", menu)
 btnStop.Size = UDim2.new(1,-20,0,30)
 btnStop.Position = UDim2.new(0,10,0,300)
 btnStop.Text = "Stop Loop"
-btnStop.BackgroundColor3 = Color3.fromRGB(200,0,0) -- merah
+btnStop.BackgroundColor3 = Color3.fromRGB(200,0,0)
 btnStop.TextColor3 = Color3.fromRGB(255,255,255)
 Instance.new("UICorner", btnStop).CornerRadius = UDim.new(0,6)
 
@@ -149,7 +149,7 @@ btnRun.MouseButton1Click:Connect(function()
             if savedLocations[spot] then
                 local char = game.Players.LocalPlayer.Character
                 if char and char:FindFirstChild("HumanoidRootPart") then
-                    char.HumanoidRootPart.CFrame = CFrame.new(savedLocations[spot])
+                    char.HumanoidRootPart.CFrame = savedLocations[spot]
                 end
             end
             currentIndex = currentIndex % #spots + 1
@@ -196,3 +196,4 @@ end
 
 makeDraggable(icon)
 makeDraggable(menu)
+
